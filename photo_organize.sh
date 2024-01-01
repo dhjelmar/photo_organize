@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 ## return relative path
 path=`ff config | cut -d '/' -f2-`
 
