@@ -56,6 +56,9 @@ do
     echo "subject3          =" $subject3
 
 
+    [[ "$subject3"  =~ [a-zA-Z] ]] && echo "contains letters"
+
+    
     #####################################################################
     # need to add coding to:
     #    - test subject1, subject2, and subject3
