@@ -9,8 +9,11 @@
 original=`pwd`
 
 ## find relative paths to jpg files
-files=`find . -print | grep -i .jpg`
-#files=`find . -print | grep -i .jpg | cut -d '/' -f2`
+## files=`find . -print | grep -i .jpg`
+files=`find . -type f -name "*.jpg"`
+## the following is possibly better to find all images (i.e., not just jpg)
+## taken from https://stackoverflow.com/questions/16758105/list-all-graphic-image-files-with-find
+files=`find . -type f -print0 | xargs -0 file --mime-type | grep -F 'image/' | cut -d ':' -f 1`
 #echo $files
 
 # need to first fix to handle spaces in folder names
