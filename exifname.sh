@@ -87,15 +87,15 @@ do
     # find 3rd deepest (subject3) folder (no spaces)
     subject3=`echo $folder_nospace | awk -F '/' '{print $(NF-3)}'`
     echo "subject3          =" $subject3
-    
+
     ## # construct new filename
     ## fn=$subject2"_"$subject1"_"$picture
     ## echo "fn            =" $fn
-
+    
     # strip out initial part of folder name
     strip='\/f\/MY_PICTURES\/'
     prefix=`echo "$folder_nospace" | sed 1,1s/$strip//`
-
+    
     # replace / with _
     strip='\/'
     prefix=`echo "$prefix" | sed 1,1s/$strip/_/g`
@@ -103,38 +103,52 @@ do
     
     # construct new filename
     picture_new=$prefix"_"$picture
+    picture_new=$subject1"_"$picture
+    picture_new=`echo "$picture_new" | sed 1,1s/" "/_/g`
     echo "picture_new   =" $picture_new
-
+    
     # print results to screen
     # echo $file, $folder, $picture, $picture_new
-
-    # rename picture
+    
+    # change picture
     old="$folder$picture"
     new="$folder$picture_new"
-    cp "$old" "$old"'_original'
-    mv "$old" "$new"
+    change_picture='yes'
+    if [[ $change_picture == 'yes' ]]; then
 
-    # options for tags
-    # https://www.exiftool.org/TagNames/XMP.html#dc
-    #
-    # Based on F:\MY Pictures\2010s\2017\2017_04\Dad's service\2010_Thanksgiving whole fam.jpg,
-    # Jackie and Dave seem to use:
-    #       XMP Title       to identify, e.g., Thanksgiving
-    #       XMP Subject     to create tags for people
-    # subject is found in "Tags" in File Explorer
-    #
-    # https://exiftool.org/gui/articles/where_what.html
-    #    XMP-dc -for your name, copyright notice, photo title, keywords, etc.
-    #    XMP-iptcCore -for your contact data (address, mail, phone, etc.)
-    #    XMP-iptcExt -for location data, event notice, names of persons on photo, etc.
-    #
-    # exiftool -xmp-dc:title="mytitle" -xmp-dc:description="mydescription" -xmp-dc:subject="subject1" -xmp-dc:subject="subject2" test.jpg
-    #
-    # tried following which loads but Diffractor does not filter on these (MS Photos only uses file name)
-    # exiftool -xmp-iptcExt:PersonInImage='David Hjelmar' -xmp-iptcExt:PersonInImage='Brad Hjelmar' test.jpg
-    exiftool -xmp-dc:title="$prefix" -xmp-dc:description="$prefix" -xmp-dc:subject="$subject3" -xmp-dc:subject="$subject2" -xmp-dc:subject="subject1" test.jpg
-t.jpg
-
+	# rename
+        cp "$old" "$old"'_original'
+        mv "$old" "$new"
+    
+        # options for tags
+        # https://www.exiftool.org/TagNames/XMP.html#dc
+        #
+        # Based on F:\MY Pictures\2010s\2017\2017_04\Dad's service\2010_Thanksgiving whole fam.jpg,
+        # Jackie and Dave seem to use:
+        #       XMP Title       to identify, e.g., Thanksgiving
+        #       XMP Subject     to create tags for people
+        # subject is found in "Tags" in File Explorer
+        #
+        # https://exiftool.org/gui/articles/where_what.html
+        #    XMP-dc -for your name, copyright notice, photo title, keywords, etc.
+        #    XMP-iptcCore -for your contact data (address, mail, phone, etc.)
+        #    XMP-iptcExt -for location data, event notice, names of persons on photo, etc.
+        #
+        # exiftool -xmp-dc:title="mytitle" -xmp-dc:description="mydescription" -xmp-dc:subject="subject1" -xmp-dc:subject="subject2" test.jpg
+        #
+        # tried following which loads but Diffractor does not filter on these (MS Photos only uses file name)
+        # exiftool -xmp-iptcExt:PersonInImage='David Hjelmar' -xmp-iptcExt:PersonInImage='Brad Hjelmar' test.jpg
+        
+        #   exiftool -xmp-dc:title="$prefix" \
+        #	     -xmp-dc:description="$prefix" \
+        #	     -xmp-dc:subject="$subject3" \
+        #	     -xmp-dc:subject="$subject2" \
+        #	     -xmp-dc:subject="subject1" \
+        #	     $new
+     
+        # xnview seems to have: Document title, Description, Caption writer, Keywords
+    
+    fi
     
 done
 cd $original
