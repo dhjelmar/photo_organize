@@ -1,25 +1,25 @@
 # photo_organize
 
-# Work Process for 
+# Work Process for xxxxxxxxxx
 
 - Defined findext function in photo_organze/_bashrc_exiftool.sh
-```
-findext () {
-   # find all files with given extension but not with "_original" following the extension
-   # usage: findext jpg
-   find . -name "*.$1" -not -name "*.$1_original*" -type f
-}
-```
+  ```
+  findext () {
+     # find all files with given extension but not with "_original" following the extension
+     # usage: findext jpg
+     find . -name "*.$1" -not -name "*.$1_original*" -type f
+  }
+  ```
 
 - Created txt file of all pictures
-```
-findext jpg   > all.txt
-findext raw  >> all.txt
-findext nef  >> all.txt
-findext heic >> all.txt
-findext png  >> all.txt
-findext tiff >> all.txt
-```
+  ```
+  findext jpg   > all.txt
+  findext raw  >> all.txt
+  findext nef  >> all.txt
+  findext heic >> all.txt
+  findext png  >> all.txt
+  findext tiff >> all.txt
+  ```
 
 - Read txt file into Excel
 
@@ -37,13 +37,14 @@ findext tiff >> all.txt
 - exifinfo
   - description: extracts metadata I am most interested in
   - usage      : exifinfo files
-```
-## example
-exifinfo fn.jpg
-```
+    ```
+    ## example
+    exifinfo fn.jpg
+    ```
 
-- exifdates writes dates to metadata
-  - usage: exifdates [-d date] files
+- exifdates
+  - description: writes dates to metadata
+  - usage      : exifdates [-d date] files
     ```
     ## examples
     
@@ -69,7 +70,7 @@ exifinfo fn.jpg
 - exifmark
 
 - shell variables
-```
-export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -CatalogSets<TagsList' 
-export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
-```
+  ```
+  export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -CatalogSets<TagsList' 
+  export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
+  ```
