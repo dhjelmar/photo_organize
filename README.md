@@ -37,27 +37,28 @@ findext tiff >> all.txt
 - exifinfo
   - description: extracts metadata I am most interested in
   - usage      : exifinfo files
-'''
+```
 ## example
 exifinfo fn.jpg
-'''
+```
 
 - exifdates writes dates to metadata
   - usage: exifdates [-d date] files
-'''
-## examples
-
-## to set dates in fn.jpg to a specific date
-exifdates -d '2024:01:01' fn.jpg
-
-## to set dates in fn.jpg to earliest date in metadata
-exifdates fn.jpg
-
-## to set dates in all files to earliest date in metadata from each file
-exifdates *
-
-## still need to test behavior of above vs the following
-exifdates '*'
+    ```
+    ## examples
+    
+    ## to set dates in fn.jpg to a specific date
+    exifdates -d '2024:01:01' fn.jpg
+    
+    ## to set dates in fn.jpg to earliest date in metadata
+    exifdates fn.jpg
+    
+    ## to set dates in all files to earliest date in metadata from each file
+    exifdates *
+    
+    ## still need to test behavior of above vs the following
+    exifdates '*'
+    ```
 
 - exifclean
 
@@ -68,7 +69,7 @@ exifdates '*'
 - exifmark
 
 - shell variables
-'''
+```
 export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -CatalogSets<TagsList' 
 export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
-'''
+```
