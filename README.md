@@ -2,23 +2,30 @@
 
 # Work Process for 
 
-- Defined find alias in Chromebook-linux/_bash_aliases
+- Defined findext function in photo_organze/_bashrc_exiftool.sh
 ```
-alias ff='find . -print | grep -i'
+findext () {
+   # find all files with given extension but not with "_original" following the extension
+   # usage: findext jpg
+   find . -name "*.$1" -not -name "*.$1_original*" -type f
+}
 ```
 
 - Created txt file of all pictures
 ```
-ff jpg   > all.txt
-ff raw  >> all.txt
-ff nef  >> all.txt
-ff heic >> all.txt
-ff png  >> all.txt
-ff tiff >> all.txt
-
+findext jpg   > all.txt
+findext raw  >> all.txt
+findext nef  >> all.txt
+findext heic >> all.txt
+findext png  >> all.txt
+findext tiff >> all.txt
 ```
 
 - Read txt file into Excel
+
+
+
+
 
 
 -------------------------------------------------
@@ -30,27 +37,27 @@ ff tiff >> all.txt
 - exifinfo
   - description: extracts metadata I am most interested in
   - usage      : exifinfo files
-    '''
-    ## example
-    exifinfo fn.jpg
-    '''
+'''
+## example
+exifinfo fn.jpg
+'''
 
 - exifdates writes dates to metadata
   - usage: exifdates [-d date] files
-    '''
-    ## examples
+'''
+## examples
 
-    ## to set dates in fn.jpg to a specific date
-    exifdates -d '2024:01:01' fn.jpg
+## to set dates in fn.jpg to a specific date
+exifdates -d '2024:01:01' fn.jpg
 
-    ## to set dates in fn.jpg to earliest date in metadata
-    exifdates fn.jpg
+## to set dates in fn.jpg to earliest date in metadata
+exifdates fn.jpg
 
-    ## to set dates in all files to earliest date in metadata from each file
-    exifdates *
+## to set dates in all files to earliest date in metadata from each file
+exifdates *
 
-    ## still need to test behavior of above vs the following
-    exifdates '*'
+## still need to test behavior of above vs the following
+exifdates '*'
 
 - exifclean
 
@@ -61,7 +68,7 @@ ff tiff >> all.txt
 - exifmark
 
 - shell variables
-  '''
-  export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -CatalogSets<TagsList' 
-  export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
-  '''
+'''
+export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -CatalogSets<TagsList' 
+export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
+'''
