@@ -17,6 +17,12 @@ alias exifmark='exiftool -r -TagsList="delete_this_if_duplicate"'
 export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -CatalogSets<TagsList'
 export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
 
+findext () {
+   # find all files with given extension but not with "_original" following the extension
+   # usage: findext jpg
+   find . -name "*.$1" -not -name "*.$1_original*" -type f
+}
+
 files=$git_path'photo_organize/modules/*.sh'
 for f in $files; do
   echo "source $f"
