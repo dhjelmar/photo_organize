@@ -1,5 +1,8 @@
 #! /usr/bin/env bash
 
+change_picture='no'
+
+
 #https://medium.com/sysf/bash-scripting-everything-you-need-to-know-about-bash-shell-programming-cd08595f2fba#:~:text=Normally%2C%20a%20Bash%20script%20file,is%20a%20shell%20script%20file.
 # math
 # result=1+1          # 1+1
@@ -113,7 +116,6 @@ do
     # change picture
     old="$folder$picture"
     new="$folder$picture_new"
-    change_picture='yes'
     if [[ $change_picture == 'yes' ]]; then
 
 	# rename
