@@ -22,6 +22,10 @@
   ```
 
 - Read txt file into Excel
+  - xxxxxxxxxx
+  - xxxxxxxxxx
+
+- xxxxxxxxxxx
 
 
 
@@ -30,6 +34,29 @@
 
 -------------------------------------------------
 # Supporting tools
+
+- exiforg
+  - description: recursively moves image files into folders based on user specified structure
+  - usage      : exiforg [-h] [-f] struct sourcefolder targetfolder
+  - options    : `-h`     = help
+    - struct = sets folder structure
+      
+      `-ym`  = folder structure is YYYY / YYYY_mm             
+      `-ymd` = folder structure is YYYY / YYYY_mm / YYYY_mm_dd
+      `-ymt` = folder structure is YYYY / YYYY_mm / Title; Only image files with Title metadata will be moved
+      
+    - `-d`     = dry run shows chagnes that will be made but does not make them
+    - `-f`     = flatten current folder (recursively moves all images to current folder)
+
+  - examples:
+    ```
+    exiforg -ymt . ../sorted    # moves all image files to folder 'sorted' in ymt structure
+    exiforg -h               # to get help
+    exiforg -f               # to recursively flatten imgage files in subfolders to current folder
+    ```
+
+example of simple manual command:
+    exiftool -r -d %Y/%Y_%m '-Directory<newfolder/\$FileCreateDate' .
 
 - exifex
   - provides a list of useful examples to the screen
