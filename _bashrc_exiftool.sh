@@ -5,7 +5,7 @@
 
 alias exiftool='/c/Windows/exiftool.exe'
 
-alias exifclean='exiftool -all= --icc_profile:all'  # -- clean safe meta daat except keeps the icc_profile info
+alias exifclean='exiftool -all= --icc_profile:all --datetimeoriginal'  # -- clean safe meta daat except keeps the icc_profile and datetimeoriginal info
 alias exdirclean='rm -r *.jpg_original'
 
 alias exifrestore='exiftool -restore_original'      # "_original" files must be in same folder as edited files
@@ -84,3 +84,21 @@ exifex () {
 # IFS='#'
 # subject=$(exiftool -s -s -s -E -sep "${IFS}" "-XMP:Subject" "IMG-20230128-WA0000.jpg")
 # echo $subject
+
+
+
+###################################################################
+# none of the following is quite what I want
+
+# https://exiftool.org/forum/index.php?topic=7272.0
+# example to grab date from a portion of folder name with dashes in dates
+#    exiftool -v -r "-datetimeoriginal<${directory;s/.*(\d{4})-(\d\d)-(\d\d).*/$1:$2:$3/} 00:00:00" .
+#
+# following do not seem to work
+# modified for "_" instead of "-" in folder names
+#    alias folderdate='exiftool -v -r "-datetimeoriginal<${directory;s/.*(\d{4})_(\d\d)_(\d\d).*/$1:$2:$3/} 00:00:00"'
+# modified to only grab year and month (sets day to 1st of month)
+#    alias folderdate='exiftool -v -r "-datetimeoriginal<${directory;s/.*(\d{4})_(\d\d).*/$1:$2/}:01 00:00:00"'
+
+# https://exiftool.org/forum/index.php?topic=5172.0
+# exiftool "-datetimeoriginal<${directory;/(\d{4}).(\d{2}).(\d{2})/ ? $_=qq($1:$2:$3 00:00:00) : undef}" FILE
