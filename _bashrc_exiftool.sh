@@ -6,6 +6,7 @@
 alias exiftool='/c/Windows/exiftool.exe'
 
 alias exifclean='exiftool -all= --icc_profile:all --datetimeoriginal'  # -- clean safe meta daat except keeps the icc_profile and datetimeoriginal info
+
 alias exdirclean='rm -r *.jpg_original'
 
 alias exifrestore='exiftool -restore_original'      # "_original" files must be in same folder as edited files
@@ -18,15 +19,45 @@ export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -Cata
 export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
 
 findext () {
-   # find all files with given extension but not with "_original" following the extension
-   # usage: findext jpg
-   find . -name "*.$1" -not -name "*.$1_original*" -type f
+    # find all files with given extension but not with "_original" following the extension
+    # usage: findext jpg
+    find . -name "*.$1" -not -name "*.$1_original*" -type f
+}
+
+findorig () {
+    # find all files that end with "_original"
+    # usage: findorig
+    find . -name "*_original" -type f
+}
+
+countf () {
+    # recursive file count in current directory
+    find . -type f | wc -l
+}
+
+countd () {
+    # recursive file count in current directory
+    find . -type d | wc -l
+}
+
+rmr () {
+    # recursively remove all files that match $1
+    # usage: rmr target
+    #        rmr "*_original"
+    find . -name "$1" -type f -exec rm -f {} \;
+    # find . -name "$1" -type f
+}
+
+rmd () {
+    # recursively empty folders
+    # usage: rmorig
+    find . -empty -type d -delete
 }
 
 files=$git_path'photo_organize/modules/*.sh'
 for f in $files; do
-  echo "source $f"
-  source "$f"
+    echo "source $f"
+    source "$f"
 done
 
 # examples
