@@ -2,12 +2,14 @@
 
 # Work Process to organize files
 
-- Review existing folders to determine whether metadata dates need to be fixed before using `exiforg` to create file structure
-  - Use digikam and or exifdates to correct dates if needed
-    - In order of preference, `exiforg` will use DateTimeOriginal, CreateDate, FileCreateDate, then FileModifyDate.
-    - digiKam: easily view and modify DateTimeOriginal to a user specifeid date for highlighted images
-    - exifdates: set all dates to either a user specified date or the earliest date for each image in the metadata for that image recursively through folders
-  - Use digiKam to add descriptive titles to pictures to have exiforg use them to create folder naems
+- Review existing folders to determine whether metadata dates or titles need to be fixed before using `exiforg` to create file structure (`exiforg` will use DateTimeOriginal, CreateDate, FileCreateDate, then FileModifyDate if needed).
+  - digikam
+    - In album (enter using top left side tab), highlight pictures to modify.
+    - Press `t` to open tag interface then select "Description"
+    - If needed, correct date. If desired, add title. Select "Apply".
+  - exifdates
+    - Use to set dates to either a user specified date or the earliest date for each image in the metadata for that image recursively through folders
+    - See instructions further below
 
 - Create txt file of all folders that contain images that need to be organized
   
