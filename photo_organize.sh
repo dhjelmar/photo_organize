@@ -6,7 +6,7 @@
 ## execute with: ./photo_organize.sh
 
 # identify current folder
-original=`pwd`
+pwd=$PWD
 
 ## find relative paths to jpg files
 ## files=`find . -print | grep -i .jpg`
@@ -26,8 +26,8 @@ i=0
 for file in ${files}
 do
 
-    # start in original folder
-    cd $original
+    # start in pwd folder
+    cd $pwd
 
     i=$((i+1))
     echo ' '
@@ -182,7 +182,7 @@ echo '-------------------------'
 
 ## if no match, set all dates to the 1st of the month and year of the folder name
 
-cd $original
+cd $pwd
 
 ## return file spaces to behave as they did originally
 IFS=$SAVEIFS
