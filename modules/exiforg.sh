@@ -12,6 +12,7 @@ exiforg () {
 	    -h|--help)
 		echo
 		echo "description: recursively moves image files into folders based on user specified structure"
+		echo "             removes any empty folders after moves in source and target folders"
 		echo
 		echo "usage: exiforg [-h] [-f] struct sourcefolder targetfolder"
 		echo
@@ -94,4 +95,8 @@ exiforg () {
                  '-TestName<'"$target"'/$DateTimeOriginal'"$title" \
                  "$source"
     fi
+
+    # eliminate empty folders in source and target folders
+    find $source -empty -type d -delete
+    if [ $source != $target ]; then find $target -empty -type d -delete; fi
 }
