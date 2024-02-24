@@ -48,7 +48,7 @@ rmr () {
     # find . -name "$1" -type f
 }
 
-rmd () {
+rmempty () {
     # recursively empty folders
     # usage: rmorig
     find . -empty -type d -delete
