@@ -3,6 +3,7 @@
 # Work Process to organize files
 
 - Review existing folders to determine whether metadata dates or titles need to be fixed before using `exiforg` to create file structure (`exiforg` will use DateTimeOriginal, CreateDate, FileCreateDate, then FileModifyDate if needed).
+  - If you are confident that dates are good and just want to view the tree of folder names so you know where to focus to add to meta data, enter `treed`.
   - digikam
     - In album (enter using top left side tab), highlight pictures to modify.
     - Press `t` to open tag interface then select "Description"
@@ -10,21 +11,20 @@
   - exifdates
     - Use to set dates to either a user specified date or the earliest date for each image in the metadata for that image recursively through folders
     - See instructions further below
-
-- Create txt file of all folders that contain images that need to be organized
-  
-  `find . -type d > alldir.txt`
-
-- Modify rows in alldir.txt that end in useful titles, and write those titles to metadata (see example below). Delete other rows. Can use an Emacs or Excel macro or some other tool to make this easy. Copy and paste results into Linux or Git Bash shell.
-  - example: `exiftool "-title=Rome, Italy" "./some picture folder/a deeper picture folder/Rome, Italy"`
+  - exiftool
+    - Use directly if only need to change titles, for example, the following adds a title recursively through the folder:
+      `exiftool -r "-title=Italy, Rome" .`
 
 - Run exiforg to establish folder structure: YYYY / YYYY_mm / YYYY_mm_dd
-  - example: `exiforg -ymd . ../sorted`
+  - Example: `exiforg -ymd . .`
+  - To inspect the folder structure: `treed`
+  - To inspect what files are in what folders: `tree`
 
 - Run exiforg again to move images with titles from YYYY_mm_dd to YYYY_mm_Title folders
   - example: `exiforg -ymt . .`
 
 - In digiKam or some other picture managment tool
+  - In album, right click and select "refresh"
   - Inspect new folder structure and pictures in digiKam
   - Rename remaining YYYY_mm_dd folders to YYYY_mm_Title format if desired
 
