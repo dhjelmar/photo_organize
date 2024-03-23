@@ -45,7 +45,7 @@ exifdates () {
     if [ -z "$date" ]; then
 	# no date provided
 	echo 'extract oldest time from metatdata for each file'
-	config_file=$git_path"photo_organize/set_earliest_date.config"
+	config_file=$git_path"set_earliest_date.config"
 	
 	$test exiftool -config $config_file '-DateTimeOriginal<OldestDateTime'  \
               '-CreateDate<OldestDateTime'                             \
