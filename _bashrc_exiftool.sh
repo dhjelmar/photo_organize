@@ -18,11 +18,26 @@ alias exifmark='exiftool -r -TagsList="delete_this_if_duplicate"'
 export tags='-Keywords<TagsList -Subject<TagsList -LastKeywordXMP<TagsList -CatalogSets<TagsList'
 export dates='-FileCreateDate<DateTimeOriginal -FileModifyDate<DateTimeOriginal'
 
+findf () {
+    # find all files matching pattern
+    # usage: findext jpg
+    find . -name "*$1*" -type f
+}
+
 findext () {
     # find all files with given extension but not with "_original" following the extension
     # usage: findext jpg
     find . -name "*.$1" -not -name "*.$1_original*" -type f
 }
+
+findv () {
+    # find all video files
+    # usage: findv
+    find . -type f |
+       file --mime-type --no-pad --files-from - |
+       grep --fixed-strings ': video/'
+}
+
 
 findorig () {
     # find all files that end with "_original"
