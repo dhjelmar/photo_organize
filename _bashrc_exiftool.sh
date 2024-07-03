@@ -54,7 +54,7 @@ rmempty () {
     find . -empty -type d -delete
 }
 
-files=$git_path'photo_organize/modules/*.sh'
+files=$git_path'/photo_organize/modules/*.sh'
 for f in $files; do
     echo "source $f"
     source "$f"
